@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { apiUrl } from '../utils/api.utils';
 
 export interface RegisterRequest {
   fullName: string;
@@ -10,7 +11,7 @@ export interface RegisterRequest {
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private baseUrl = 'http://localhost:8080/api/users';
+  private baseUrl = apiUrl('/api/users');
 
   constructor(private http: HttpClient) {}
 

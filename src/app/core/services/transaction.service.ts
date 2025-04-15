@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 
 import { Category } from '../../models/category.model';
 import { Transaction } from '../../models/transaction.model';
+import { apiUrl } from '../utils/api.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransactionService {
-  private transactionUrl = 'http://localhost:8080/api/transactions';
-  private categoryUrl = 'http://localhost:8080/api/categories';
+  private transactionUrl = apiUrl('/api/transactions');
+  private categoryUrl = apiUrl('/api/categories');
 
   constructor(private http: HttpClient) {}
 

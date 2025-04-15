@@ -2,6 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { apiUrl } from '../utils/api.utils';
 
 interface LoginRequest {
   email: string;
@@ -11,13 +12,11 @@ interface LoginRequest {
 interface LoginResponse {
   token: string;
 }
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
-
+  private baseUrl = apiUrl('/api/auth');
   constructor(private http: HttpClient) {}
 
   login(request: LoginRequest): Observable<LoginResponse> {
