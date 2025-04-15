@@ -1,4 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tailwind core directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Layout fix for sticky footer */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}

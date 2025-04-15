@@ -1,0 +1,16 @@
+<header class="bg-gray-800 text-white py-4 shadow-md">
+  <div class="container mx-auto px-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Personal Finance Tracker</h1>
+    <nav class="space-x-4">
+      <a routerLink="/dashboard" routerLinkActive="font-semibold underline"
+        >Dashboard</a
+      >
+      <a routerLink="/transactions" routerLinkActive="font-semibold underline"
+        >Transactions</a
+      >
+      <button (click)="logout()" class="text-red-300 hover:text-white">
+        Logout
+      </button>
+    </nav>
+  </div>
+</header>

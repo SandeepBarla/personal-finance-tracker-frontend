@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -12,6 +13,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -20,11 +22,16 @@ export const routes: Routes = [
             (m) => m.DashboardComponent
           ),
       },
-      // Add more routes like transactions here
+      {
+        path: 'transactions',
+        loadComponent: () =>
+          import('./pages/transactions/transactions.component').then(
+            (m) => m.TransactionsComponent
+          ),
+      },
     ],
   },
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  // Default redirect
   { path: '**', redirectTo: 'login' },
 ];
