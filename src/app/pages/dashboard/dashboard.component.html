@@ -17,9 +17,72 @@
     </div>
   </div>
 
-  <!-- Transactions -->
+  <!-- Dashboard Chart Section -->
+  <section class="mb-10">
+    <h1 class="text-xl font-bold mb-6 text-gray-800">Analytics</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Left Column: Category Summary with Tabs -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <div class="flex mb-4 border-b">
+          <button
+            class="px-4 py-2 text-sm font-medium border-b-2"
+            [class.border-red-500]="activeTab === 'EXPENSE'"
+            (click)="activeTab = 'EXPENSE'"
+          >
+            💸 Expense
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium border-b-2"
+            [class.border-green-500]="activeTab === 'INCOME'"
+            (click)="activeTab = 'INCOME'"
+          >
+            💰 Income
+          </button>
+        </div>
+
+        <!-- Chart Area -->
+        <div class="aspect-square w-full max-w-sm mx-auto">
+          <canvas
+            *ngIf="activeTab === 'EXPENSE'"
+            #expenseChart
+            baseChart
+            [data]="expenseChartConfig.data"
+            [type]="expenseChartConfig.type"
+            [options]="expenseChartConfig.options"
+          ></canvas>
+
+          <canvas
+            *ngIf="activeTab === 'INCOME'"
+            #incomeChart
+            baseChart
+            [data]="incomeChartConfig.data"
+            [type]="incomeChartConfig.type"
+            [options]="incomeChartConfig.options"
+          ></canvas>
+        </div>
+      </div>
+
+      <!-- Right Column: Monthly Summary Bar Chart -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <h2 class="text-lg font-semibold text-gray-800 mb-4">
+          📊 Monthly Income vs Expense
+        </h2>
+        <div class="w-full h-full">
+          <canvas
+            baseChart
+            [data]="monthlyChartConfig.data"
+            [type]="monthlyChartConfig.type"
+            [options]="monthlyChartConfig.options"
+          ></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Transactions -->
   <div>
-    <h2 class="text-lg font-semibold mb-3">Transactions</h2>
+    <h2 class="text-lg font-semibold mb-3">Recent Transactions</h2>
     <div class="bg-white shadow-md rounded-lg overflow-x-auto">
       <table class="w-full text-left border-collapse">
         <thead>
