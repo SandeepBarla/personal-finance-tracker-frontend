@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('incomeChart', { static: false, read: BaseChartDirective })
   incomeChart?: BaseChartDirective;
+  @ViewChild('monthlyChart', { static: false, read: BaseChartDirective })
+  monthlyChart?: BaseChartDirective;
 
   expenseChartConfig: ChartConfiguration<'pie'> = {
     type: 'pie',
@@ -144,7 +146,6 @@ export class DashboardComponent implements OnInit {
     // Load INCOME categories
     this.analyticsService.getCategorySummary('INCOME').subscribe({
       next: (res) => {
-        console.log('INCOME CATEGORY RESPONSE:', res);
         this.incomeChartConfig.data.labels = res.map((item) => item.category);
         this.incomeChartConfig.data.datasets[0].data = res.map(
           (item) => item.amount
@@ -168,6 +169,8 @@ export class DashboardComponent implements OnInit {
         this.monthlyChartConfig.data.datasets[1].data = res.map(
           (item) => item.totalExpense
         );
+
+        this.monthlyChart?.update();
       },
       error: (err) => console.error('Failed to fetch monthly summary', err),
     });
